@@ -27,6 +27,10 @@ const userSchema = new Schema({
     trim: true,
     match: [/^\d{10}$/, "Please enter a 10-digit phone number"],
   },
+  role: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
