@@ -76,7 +76,6 @@ exports.login = async (req, res) => {
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
     // Send username along with success message
     res
       .status(200)
