@@ -17,7 +17,7 @@ router.get(
     const email = req.user.email;
     const username = req.user.username;
     res.redirect(
-      `http://localhost:5173/dashboard?email=${email}&username=${username}`
+      `https://vigybag.com/dashboard?email=${email}&username=${username}`
     );
   }
 );
