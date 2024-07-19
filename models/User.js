@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose");
+const findOrCreate = require("mongoose-findorcreate");
 
 const userSchema = new Schema({
   username: {
@@ -10,7 +12,7 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
     unique: true,
     trim: true,
     lowercase: true,
@@ -18,12 +20,12 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: false,
     minlength: 6,
   },
   phone: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     match: [/^\d{10}$/, "Please enter a 10-digit phone number"],
   },
@@ -31,7 +33,16 @@ const userSchema = new Schema({
     type: Number,
     default: 0,
   },
+  googleId: String,
+  secret: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+  otp: String,
+  otpExpires: Date,
 });
+
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
 
 const User = mongoose.model("User", userSchema);
 
