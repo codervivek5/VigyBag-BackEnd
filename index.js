@@ -8,6 +8,7 @@ const routes = require("./routes");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const passwordResetRoutes = require("./routes/passwordResetRoutes");
+const adminRegistrationRoutes = require("./routes/adminRegistrationRoutes");
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use("/auth", authRoutes);
 app.use("/api", routes);
 app.use("/api", passwordResetRoutes);
 app.use("/vpi", userRoutes);
+app.use("/api/v1", adminRegistrationRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
