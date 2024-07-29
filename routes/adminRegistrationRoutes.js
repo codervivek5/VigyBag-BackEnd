@@ -3,7 +3,9 @@ const router = express.Router();
 const AdminRegistration = require('../models/AdminRegistration');
 const multer = require('multer');
 
-const upload = multer();
+// Configure Multer to store files in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.post('/vigy_form', upload.fields([
   { name: 'panCard', maxCount: 1 },
@@ -45,21 +47,21 @@ router.post('/vigy_form', upload.fields([
       promotionalCode
     });
 
-    if (req.files['panCard']) {
+    if (req.files && req.files['panCard']) {
       newRegistration.panCard = {
         data: req.files['panCard'][0].buffer,
         contentType: req.files['panCard'][0].mimetype
       };
     }
 
-    if (req.files['addressProof']) {
+    if (req.files && req.files['addressProof']) {
       newRegistration.addressProof = {
         data: req.files['addressProof'][0].buffer,
         contentType: req.files['addressProof'][0].mimetype
       };
     }
 
-    if (req.files['profilePicture']) {
+    if (req.files && req.files['profilePicture']) {
       newRegistration.profilePicture = {
         data: req.files['profilePicture'][0].buffer,
         contentType: req.files['profilePicture'][0].mimetype
